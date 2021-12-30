@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios"
 import {ShoppingCartContext} from "./Contexts/ShoppingCartContext";
-import {UserContext} from "./Contexts/UserContext";
+import {motion} from "framer-motion";
+
 
 function MenuItem({item_data}){
 
@@ -30,7 +31,7 @@ function Menu(){
     useEffect(() => {
         axios({
             method: "get",
-            url: `${process.env.REACT_APP_API_URL}/api/categories/`
+            url: `${process.env.REACT_APP_API_URL}/categories`
         }).then(res => set_menu_list(res.data))
     }, [])
 
@@ -55,48 +56,35 @@ function CartButton(){
 }
 
 function Header(props) {
-    const {logged_in, logout_user} = useContext(UserContext)
-    const [site_info, set_site_info] = useState(null)
-    const API_URL = process.env.REACT_APP_API_URL
-    const history = useHistory()
+    const [navbar, setNavbar] = useState(false);
 
-    const fetch_site_info = () => {
-        axios({
-            method: "get",
-            url: `${API_URL}/api/site-info/`
-        }).then(res => set_site_info(res.data))
-    }
+    const changeBackground = () => {
+        if (window.scrollY >= 170) {
+            setNavbar(true)
+        } else {
+            setNavbar(false)
+        }
+    };
 
-    const log_out_clicked = async () => {
-        await logout_user()
-        history.push("/")
-    }
-
-    useEffect(()=> {
-        fetch_site_info()
-    }, [])
+    window.addEventListener('scroll', changeBackground);
 
     return (
         <div className="header-container">
 
             <div className="content-container">
                 <div className="title-container">
-                    <Link to="/"><h1>{site_info && site_info.name}</h1></Link>
+                    <Link to="/"><h1>Stylus Shop</h1></Link>
+
+                    <div className="welcome-container">
+                        <h2>Hello, my name is Gabor.</h2>
+
+                        <p>
+                            Welcome to my webshop
+                        </p>
+                    </div>
 
                     <div>
-                        {
-                            logged_in?
-                                <div className="logged-in-container">
-                                    <Link to="/users/profile">
-                                        <i className="fas fa-user"/>
-                                    </Link>
-
-                                    <button onClick={log_out_clicked}>Log Out</button>
-                                </div>
-                                :
-                                <small className="sign-in-container"><Link to="/users/login">Sign in</Link> or <Link to="/users/registration">Create an Account</Link></small>
-                        }
-
+                        <small className="sign-in-container"><Link to="/users/login">Sign in</Link> or <Link to="/users/registration">Create an Account</Link></small>
                         <br/>
 
                         <div className="search-box">
@@ -109,7 +97,7 @@ function Header(props) {
                     </div>
 
                 </div>
-                
+
 
                 <Menu/>
             </div>

@@ -9,7 +9,7 @@ export const ItemListProvider = (props) => {
     const fetch_item_list = () => {
         axios({
             method: "get",
-            url: `${process.env.REACT_APP_API_URL}/api/shop-items/`
+            url: `${process.env.REACT_APP_API_URL}/items`
         }).then(res => set_items(res.data))
     }
 

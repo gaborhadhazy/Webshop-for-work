@@ -1,7 +1,7 @@
-.cart-container{
+.cart-container {
   position: fixed;
   z-index: 200;
-  background-color: rgba(255,255,255, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   top: 0;
   left: 0;
   right: 0;
@@ -11,17 +11,19 @@
   align-items: center;
 
   .cart-details{
-    width: 800px;
+    width: 750px;
     background-color: white;
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
     padding: 10px;
     border-radius: $default-radius;
     display: flex;
     flex-direction: column;
 
-    .price, .taxes, button, .checkout-button{
+    .price, .taxes, button{
       align-self: flex-end;
+
     }
+
 
     .price{
       margin-bottom: 10px;
@@ -30,13 +32,14 @@
     button{
       margin-top: 30px;
     }
+
   }
 }
 
 .cart-item-container{
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 121px 350px 127px auto 22px;
+  grid-template-columns: 121px 267px 127px auto 22px;
   align-items: center;
 
   i{

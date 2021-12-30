@@ -5,28 +5,26 @@ import SignInPage from "./components/Users/SignInPage";
 import RegistrationPage from "./components/Users/RegistrationPage";
 import ItemListPage from "./components/Pages/ItemListPage";
 import ItemDetailsPage from "./components/Pages/ItemDetailsPage";
-
+import Routes from "react-router-dom"
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
+    Switch,
 } from "react-router-dom";
 
 import PasswordResetPage from "./components/Users/PasswordResetPage";
 import {ItemListProvider} from "./components/Contexts/ItemListContext";
 import {ShoppingCartProvider} from "./components/Contexts/ShoppingCartContext";
 import ShoppingCartPopup from "./components/ShoppingCart/ShoppingCartPopup";
+import {motion} from 'framer-motion'
+import {getElementError} from "@testing-library/react";
 import CheckoutPage from "./components/Pages/CheckoutPage";
-import {UserProvider} from "./components/Contexts/UserContext";
-import Profile from "./components/Users/Profile";
-import RegistrationEmailSentPage from "./components/Users/RegistrationEmailSentPage";
-import ProtectedRoute from "./components/ProtectedRoute";
-
 
 function App() {
+
   return (
-  <Router>
-      <UserProvider>
+      <div>
+        <Router>
       <ItemListProvider>
             <ShoppingCartProvider>
 
@@ -35,31 +33,27 @@ function App() {
 
                     <div>
                         <Header/>
-
-                        <Switch>
+                            <Switch>
                             <Route path="/categories/:category/:subcategory?" component={ItemListPage}/>
                             <Route path="/details/:slug" component={ItemDetailsPage}/>
-                            <Route path="/checkout/" component={CheckoutPage}/>
 
                             <Route path="/users/login" component={SignInPage}/>
                             <Route path="/users/registration" component={RegistrationPage}/>
                             <Route path="/users/password-reset" component={PasswordResetPage}/>
-                            <Route path="/users/registration-email-sent" component={RegistrationEmailSentPage}/>
-
-                            <ProtectedRoute path="/users/profile" component={Profile}/>
-
                             <Route path="/" component={HomePage}/>
+                            <Route path="/checkout"component={CheckoutPage}/>
                         </Switch>
                     </div>
-
                     <Footer/>
+
                 </div>
 
             </ShoppingCartProvider>
       </ItemListProvider>
+        </Router>
+      </div>
 
-    </UserProvider>
-  </Router>
+
   );
 }
 

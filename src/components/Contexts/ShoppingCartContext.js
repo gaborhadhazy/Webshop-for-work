@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, isValidElement, useEffect, useState} from "react";
 
 export const ShoppingCartContext = createContext(true)
 
@@ -6,33 +6,31 @@ export const ShoppingCartProvider = (props) => {
     const [shopping_list, set_shopping_list] = useState([])
     const [total, set_total] = useState(0)
     const [count, set_count] = useState(0)
-
-    // shopping cart visibility
     const [visible, set_visible] = useState(false)
+
 
     const set_new_shopping_list = (new_shopping_list) => {
         set_shopping_list(new_shopping_list)
         localStorage.setItem("shopping_list", JSON.stringify(new_shopping_list))
     }
 
-    const clear_shopping_list = () => {
-        set_new_shopping_list([])
-    }
-
     const set_quantity = (item_id, value) => {
         const _shopping_list = [...shopping_list]
-        for(let i=0; i<_shopping_list.length;i++){
-            let _item = _shopping_list[i]
-            if(_item.id === item_id){
+
+        for (let i=0; i<shopping_list.length;i++){
+           let _item = shopping_list [i]
+            if (_item.id === item_id){
                 let _new_quantity = _item.quantity + value
 
-                if(_new_quantity > 0) {
+                if (_new_quantity > 0){
                     _item.quantity = _new_quantity
                 }
                 break
             }
+
         }
         set_new_shopping_list(_shopping_list)
+
     }
 
     const is_in_cart = (item_id) => {
@@ -42,8 +40,8 @@ export const ShoppingCartProvider = (props) => {
 
     const calc_count = () => {
         let _count = 0
-        for(let i=0;i<shopping_list.length;i++){
-            let _item = shopping_list[i]
+        for (let i= 0; i<shopping_list.length; i++){
+            let _item = shopping_list [i]
             _count += _item.quantity
         }
 
@@ -56,7 +54,7 @@ export const ShoppingCartProvider = (props) => {
             const _item = shopping_list[i]
             const _price = _item.price
 
-            _total += _price * _item.quantity
+            _total += _price*_item.quantity
         }
 
         set_total(_total)
@@ -90,6 +88,7 @@ export const ShoppingCartProvider = (props) => {
         set_new_shopping_list(_shopping_list)
     }
 
+
     useEffect(() => {
         calc_count()
         calc_total()
@@ -97,7 +96,7 @@ export const ShoppingCartProvider = (props) => {
 
     useEffect(() => {
         const old_shopping_list = localStorage.getItem("shopping_list")
-        if(old_shopping_list){
+        if (old_shopping_list){
             set_shopping_list(JSON.parse(old_shopping_list))
         }
     }, [])
@@ -112,8 +111,7 @@ export const ShoppingCartProvider = (props) => {
 
             add_to_cart: add_to_cart,
             remove_from_cart: remove_from_cart,
-            set_quantity: set_quantity,
-            clear_shopping_list: clear_shopping_list
+            set_quantity: set_quantity
         }}>
             {props.children}
         </ShoppingCartContext.Provider>

@@ -8,9 +8,7 @@
 @import "ItemList";
 @import "ItemDetails";
 @import "ShoppingCart";
-@import "CheckoutPage";
-@import "RegistrationPage";
-@import "ProfilePage";
+
 
 *{
   margin: 0;
@@ -33,7 +31,6 @@ body{
 
 hr{
   margin: 20px 0;
-  border: none;
   border-top: $border-style;
 }
 
@@ -78,8 +75,9 @@ form{
   display: flex;
   flex-direction: column;
   max-width: 300px;
-  margin: 20px auto;
+  margin: auto;
   align-items: center;
+  margin-top: 270px;
 
   input{
     margin-bottom: 10px;
@@ -92,15 +90,4 @@ form{
   button{
     align-self: center;
   }
-}
-
-.center-page-container{
-  position: fixed;
-  border: 1px solid red;
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

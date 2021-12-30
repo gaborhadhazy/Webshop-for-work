@@ -4,6 +4,7 @@ import {numberWithCommas} from "../../utilities";
 
 function ItemCard({data}) {
 
+
     return (
         <Link to={`/details/${data.slug}`} className="item-card">
             <img src={data.image} alt=""/>
