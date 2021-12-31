@@ -1,53 +1,29 @@
+
 import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {ItemListContext} from "../Contexts/ItemListContext";
 import {ShoppingCartContext} from "../Contexts/ShoppingCartContext";
-import {motion} from "framer-motion";
 import {numberWithCommas} from "../../utilities";
+
 
 function ItemPage({data}){
     const {add_to_cart} = useContext(ShoppingCartContext)
 
-    return <motion.div className="item-details-container"
-        initial={{x: -2000}}
-        animate={{x: 0}}
-        transition={{
-            delay: 0.3,
-            duration: 0.3
-        }}
-    >
+    return <div className="item-details-container">
         <div>
             <img src={data.image} alt=""/>
         </div>
 
         <div>
-            <br/>
             <h3>{data.title}</h3>
             <h2>${numberWithCommas(data.price)}</h2>
 
             <hr/>
 
             <div className="button-container">
-                <motion.button onClick={e => add_to_cart(data)}
-                    whileHover={{
-                        scale: 1.1,
-                        textShadow: "0px 0px 8px rgb(255, 255, 255)",
-                        boxShadow: "0px 0px 8px rbg(255, 255, 255)",
-
-                    }}
-                ><i className="fas fa-cart-plus"/> ADD TO CART</motion.button>
-
+                <button onClick={e => add_to_cart(data)}><i className="fas fa-cart-plus"/> ADD TO CART</button>
                 <br/>
-
-                <motion.button className="inverted"
-                        whileHover={{
-                        scale: 1.1,
-                        textShadow: "0px 0px 2px rgb(255, 255, 255)",
-                        boxShadow: "0px 0px 8px rbg(255, 255, 255)",
-
-                    }}
-
-                >BUY IT NOW</motion.button>
+                <button className="inverted">BUY IT NOW</button>
             </div>
 
             <hr/>
@@ -55,7 +31,7 @@ function ItemPage({data}){
             <p>{data.description}</p>
         </div>
 
-    </motion.div>
+    </div>
 }
 
 

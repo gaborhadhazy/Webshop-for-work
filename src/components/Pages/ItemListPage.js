@@ -1,3 +1,4 @@
+
 import React, {useContext, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import ItemCard from "./ItemCard";
@@ -9,14 +10,9 @@ function ItemListPage(props) {
     const {subcategory} = useParams()
     const {items} = useContext(ItemListContext)
 
-    const onscroll = (e) => {
-        alert("Hi")
-    }
-
     return (
-        <div className="content-container" onScroll={onscroll}>
+        <div className="content-container">
             <div className="content-offset"/>
-            <br/>
             <h3>{category}</h3>
 
             <div className="item-list-container">

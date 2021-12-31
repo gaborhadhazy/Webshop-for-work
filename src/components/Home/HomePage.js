@@ -1,10 +1,11 @@
+
 import React, {useContext, useEffect, useState} from 'react';
 import Slider from "./Slider";
 import ShopFor from "./ShopFor";
 import Home_ItemList from "./Home_ItemList";
 import axios from "axios"
-import {motion} from "framer-motion";
 import {ItemListContext} from "../Contexts/ItemListContext";
+
 
 function HomePage(props) {
     const {items} = useContext(ItemListContext)
@@ -35,18 +36,14 @@ function HomePage(props) {
         fetch_leica_M()
     }, [])
 
-    useEffect(() => {
+    useEffect(()=>{
         fetch_featured_list()
     }, [items])
 
     return (
-        <motion.div className="content-container"
-        initial={{ y: -1000, opacity: 0}}
-        animate={{y: 0, opacity: 1}}
-        transition={{ delay: 0.4, duration: 0.4}}
-        >
+        <div className="content-container">
             <div className="content-offset"/>
-            <br/>
+
             <Slider/>
 
             <hr/>
@@ -64,7 +61,7 @@ function HomePage(props) {
             <hr/>
 
             <Home_ItemList title="LEICA M" items={leica_M}/>
-        </motion.div>
+        </div>
     );
 }
 

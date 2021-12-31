@@ -5,12 +5,7 @@ import SignInPage from "./components/Users/SignInPage";
 import RegistrationPage from "./components/Users/RegistrationPage";
 import ItemListPage from "./components/Pages/ItemListPage";
 import ItemDetailsPage from "./components/Pages/ItemDetailsPage";
-import Routes from "react-router-dom"
-import {
-  BrowserRouter as Router,
-  Route,
-    Switch,
-} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom"
 
 import PasswordResetPage from "./components/Users/PasswordResetPage";
 import {ItemListProvider} from "./components/Contexts/ItemListContext";
@@ -24,7 +19,7 @@ function App() {
 
   return (
       <div>
-        <Router>
+        <BrowserRouter>
       <ItemListProvider>
             <ShoppingCartProvider>
 
@@ -33,16 +28,16 @@ function App() {
 
                     <div>
                         <Header/>
-                            <Switch>
-                            <Route path="/categories/:category/:subcategory?" component={ItemListPage}/>
-                            <Route path="/details/:slug" component={ItemDetailsPage}/>
+                            <Routes>
+                            <Route path="/categories/:category/:subcategory?" element={<ItemListPage/>}/>
+                            <Route path="/details/:slug" element={<ItemDetailsPage/>}/>
 
-                            <Route path="/users/login" component={SignInPage}/>
-                            <Route path="/users/registration" component={RegistrationPage}/>
-                            <Route path="/users/password-reset" component={PasswordResetPage}/>
-                            <Route path="/" component={HomePage}/>
-                            <Route path="/checkout"component={CheckoutPage}/>
-                        </Switch>
+                            <Route path="/users/login" element={<SignInPage/>}/>
+                            <Route path="/users/registration" element={<RegistrationPage/>}/>
+                            <Route path="/users/password-reset" element={<PasswordResetPage/>}/>
+                            <Route path="/" element={<HomePage/>}/>
+                            <Route path="/checkout/"element={<CheckoutPage/>} />
+                        </Routes>
                     </div>
                     <Footer/>
 
@@ -50,7 +45,7 @@ function App() {
 
             </ShoppingCartProvider>
       </ItemListProvider>
-        </Router>
+        </BrowserRouter>
       </div>
 
 

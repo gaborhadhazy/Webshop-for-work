@@ -1,3 +1,4 @@
+
 @import "variables";
 
 @import "Content";
@@ -8,7 +9,7 @@
 @import "ItemList";
 @import "ItemDetails";
 @import "ShoppingCart";
-
+@import "CheckoutPage";
 
 *{
   margin: 0;
@@ -31,6 +32,7 @@ body{
 
 hr{
   margin: 20px 0;
+  border: none;
   border-top: $border-style;
 }
 
@@ -75,9 +77,8 @@ form{
   display: flex;
   flex-direction: column;
   max-width: 300px;
-  margin: auto;
+  margin: 20px auto;
   align-items: center;
-  margin-top: 270px;
 
   input{
     margin-bottom: 10px;

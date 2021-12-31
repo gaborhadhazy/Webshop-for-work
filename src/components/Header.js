@@ -1,9 +1,8 @@
+
 import React, {useContext, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios"
 import {ShoppingCartContext} from "./Contexts/ShoppingCartContext";
-import {motion} from "framer-motion";
-
 
 function MenuItem({item_data}){
 
@@ -31,7 +30,7 @@ function Menu(){
     useEffect(() => {
         axios({
             method: "get",
-            url: `${process.env.REACT_APP_API_URL}/categories`
+            url: `${process.env.REACT_APP_API_URL}/api/categories/`
         }).then(res => set_menu_list(res.data))
     }, [])
 
@@ -56,32 +55,26 @@ function CartButton(){
 }
 
 function Header(props) {
-    const [navbar, setNavbar] = useState(false);
+    const [site_info, set_site_info] = useState(null)
+    const API_URL = process.env.REACT_APP_API_URL
 
-    const changeBackground = () => {
-        if (window.scrollY >= 170) {
-            setNavbar(true)
-        } else {
-            setNavbar(false)
-        }
-    };
+    const fetch_site_info = () => {
+        axios({
+            method: "get",
+            url: `${API_URL}/api/site-info/`
+        }).then(res => set_site_info(res.data))
+    }
 
-    window.addEventListener('scroll', changeBackground);
+    useEffect(()=> {
+        fetch_site_info()
+    }, [])
 
     return (
         <div className="header-container">
 
             <div className="content-container">
                 <div className="title-container">
-                    <Link to="/"><h1>Stylus Shop</h1></Link>
-
-                    <div className="welcome-container">
-                        <h2>Hello, my name is Gabor.</h2>
-
-                        <p>
-                            Welcome to my webshop
-                        </p>
-                    </div>
+                    <Link to="/"><h1>{site_info && site_info.name}</h1></Link>
 
                     <div>
                         <small className="sign-in-container"><Link to="/users/login">Sign in</Link> or <Link to="/users/registration">Create an Account</Link></small>

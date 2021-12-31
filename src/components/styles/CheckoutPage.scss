@@ -1,0 +1,64 @@
+
+.checkout-container{
+  display: grid;
+  grid-template-columns: auto 500px;
+
+  .costumer-details-container{
+    display: flex;
+    flex-direction: column;
+
+    .have-an-account{
+      align-self: flex-end;
+      margin-right: 10px;
+    }
+
+    input{
+      margin: 10px 0;
+    }
+
+    input{
+      margin-right: 10px;
+    }
+  }
+
+  .shopping-cart-container{
+    background-color: #eaeaea;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    hr{
+      border-color: #c5c5c5;
+    }
+
+    .card-data-container{
+      background-color: #bfbfbf;
+      border-radius: $default-radius;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .total-price-container{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button{
+      align-self: flex-end;
+    }
+
+    .cart-item-container{
+      grid-template-columns: 60px auto 80px;
+    }
+
+    .quantity-container{
+      display: none;
+    }
+
+    .delete-item-button{
+      display: none;
+    }
+  }
+}
